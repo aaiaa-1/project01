@@ -25,7 +25,7 @@ function invalidUid($username){
 }
 function invalidEmail($email){
     $result = "";
-    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         //This is a built-in function that checks the email validation 
         $result = true ;
     }
@@ -45,8 +45,8 @@ function pwdMatch($pwd ,$pwdRepeat){
     }
     return $result;  
 }
-function uidExists($conn ,$username ,$email){
-    $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ? ;";
+function uidExists($conn ,$username){
+    $sql = "SELECT * FROM users WHERE usersUid = ? ";
     /* the ? marks are used as placeholders for the username and email
         so when we are sending the data the database won't read the data
         as an actual CODE but it is going to see it as characters */
@@ -67,7 +67,7 @@ function uidExists($conn ,$username ,$email){
         exit();
         //checking if we have a mistake during the preparation statement
     }
-    mysqli_stmt_bind_param($stmt,"ss",$username ,$email);
+    mysqli_stmt_bind_param($stmt,"s",$username);
     //here we are filling the placeholders with STRING variables 
     mysqli_stmt_execute($stmt);
     //executing the statement
@@ -89,7 +89,7 @@ function uidExists($conn ,$username ,$email){
     }
     else{
         /*in this case we have no user in the DB with the same
-         username & email*/
+         username */
         $result = false ;
         return $result;
     }
@@ -105,6 +105,29 @@ function uidExists($conn ,$username ,$email){
     mysqli_stmt_close($stmt);
     //closing the statement
 }
+function emailExists($conn, $email){
+    $sql = "SELECT * FROM users WHERE usersEmail = ? ;";
+    $stmt =mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt , $sql)){
+        header("location: ../signup.php?error=stmtfailed"); 
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt,"s", $email);
+    mysqli_stmt_execute($stmt);
+
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultData)){
+       return $row;
+  }
+    else{
+       $result = false ;
+        return $result;
+    }
+   mysqli_stmt_close($stmt);
+}
+
 
 //we are doing the same thing for creating the user account
 function createUser($conn, $name, $email,$username, $pwd){

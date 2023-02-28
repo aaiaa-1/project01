@@ -36,8 +36,12 @@ if (isset($_POST["submit"])){
         exit();     
     }
     //check if the username is available
-    if( uidExists($conn, $username, $email) != false ){ 
+    if( uidExists($conn, $username) != false ){ 
         header("location: ../signup.php?error=usernametaken"); 
+        exit();     
+    }
+    if( emailExists($conn, $email) != false ){ 
+        header("location: ../signup.php?error=emailtaken"); 
         exit();     
     }
     createUser ($conn, $name, $email,$username, $pwd); 

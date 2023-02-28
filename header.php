@@ -13,9 +13,7 @@
 </head>
 <body>
     <section id="header">
-        <a href="#">
-            <img src="img/logo.png" class="logo">
-        </a>
+        
         <div>
             <ul id="navbar">
                 <a href="#" id="close">
