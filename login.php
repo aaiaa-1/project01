@@ -14,7 +14,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="formGroupExampleInput2" class="form-label">Password</label>
-                                        <input class="form-control" type="text"  name="email" placeholder="Enter your email ...">
+                                        <input class="form-control" type="text"  name="pwd" placeholder="Enter your password ...">
                                     </div>                                                                                                
                                     <button type="submit" name="submit"  class="btn btn-primary">Log In</button>                          
                             </div>
