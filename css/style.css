@@ -1,0 +1,50 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+.logo{
+    width: 60px;
+}
+#header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
+    background-color: #E3E6F3;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    position: sticky; /*to make the navbar stick on the whole page*/
+    top: 0;
+    left: 0;
+    z-index: 99999; /*To make the navbar appear over all the content*/
+}
+#navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#navbar li {
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+#navbar li a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+#navbar li a:hover,
+#navbar li a.active  {
+    color: #98a07a;
+    font-size: 17px;
+    transition: 0.3s ease;
+}
+#navbar li a.active::after,
+#navbar li a:hover::after{
+    content :"";
+    width: 30%;
+    height: 2px;
+    background-color: #98a07a;
+    position: absolute;
+    bottom: -4px;
+    left: 20px ;
+} 
