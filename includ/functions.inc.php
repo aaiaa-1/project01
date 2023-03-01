@@ -81,6 +81,9 @@ function uidExists($conn ,$username ,$email){
         /* the function means that we are fetching the data as an 
             associative array (column set to their name) and i want 
             to see if there is any user that used $resultData */
+            // echo "<pre>";
+            // print_r($row);
+            // echo "</pre>";
         return $row;
         /*here we are setting another ! PURPOSE ! to the funciton :
         if there is data inside the DB with the username/email then 
@@ -154,9 +157,19 @@ function loginUser($conn, $username, $pwd){
     }
     else if($checkPwd === true){
         session_start();
-        $_SESSION["userid"] = $uidExists["usersId"];
+        $_SESSION["userid"] = $uidExists["userSId"];
+    
         $_SESSION["useruid"] = $uidExists["usersUid"];
         header("Location:../index.php");
         exit();
+
+        /*  Session variables hold information about one single user,
+            and are available to all pages in one application
+            You can also use cookie, the difference is that the cookie 
+            recognize the computer that just loged in mean while session 
+            does not until you log in and hold your infos  
+                cookies are used to store data on the client-side,
+            while sessions are used to store data on the server-side */
+            
     }
 }

@@ -1,3 +1,8 @@
+<?php
+    session_start();
+?>
+<!-- this means that in every page that includes 'header.php' we will
+    start the session  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +27,17 @@
                 <li><a class="active" href="index.php">Home</a> </li>               
                 <li><a href="about.php">about</a> </li>
                 <li><a href="blog.php">Blog</a> </li>
-                <li><a href="signup.php">Sign up</a> </li>
-                <li><a href="login.php">Log in</a> </li>
-                <li id="lg-bag">
-                    <a href="cart.html">
-                        <i class="fa-solid fa-bag-shopping"></i>             
-                    </a> 
-                </li>  
-                
+                <?php
+                    if (isset($_SESSION["userid"])){
+                        echo "<li><a href='profile.php'>Profile Page</a> </li>";
+                        echo "<li><a href='includ/logout.inc.php'>Log  Out</a> </li>";
+                    }
+                    else{
+                        echo "<li><a href='signup.php'>Sign up</a> </li>";
+                        echo "<li><a href='login.php'>Log In</a> </li>";
+                    }
+                ?>
+               
             </ul>
         </div>       
     </section>
